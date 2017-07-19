@@ -10,7 +10,7 @@ import org.springframework.data.elasticsearch.annotations.Document;
 public class Track {
 
     @Id
-    private int id;
+    private String id;
     private String short_name;
     private String long_name;
     private String description;
@@ -29,7 +29,7 @@ public class Track {
     public Track() {
 
     }
-    public Track(int id, String short_name, String long_name, String description, String track_type, String genome_species, String genome_assembly, boolean genome_strain, String release_division, int release_version, String location_type, String location_object_type, String location_species, String location_dbtype, String location_logic_names) {
+    public Track(String id, String short_name, String long_name, String description, String track_type, String genome_species, String genome_assembly, boolean genome_strain, String release_division, int release_version, String location_type, String location_object_type, String location_species, String location_dbtype, String location_logic_names) {
         this.id = id;
         this.short_name = short_name;
         this.long_name = long_name;
@@ -46,10 +46,10 @@ public class Track {
         this.location_dbtype = location_dbtype;
         this.location_logic_names = location_logic_names;
     }
-    public int getId() {
+    public String getId() {
         return id;
     }
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
     public String getShort_name() {
