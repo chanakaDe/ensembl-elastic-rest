@@ -10,5 +10,6 @@ import java.util.List;
  */
 public interface TrackRepository extends ElasticsearchRepository<Track, String> {
 
+    List<Track> findByDescription(String description, String track_type);
 
 }

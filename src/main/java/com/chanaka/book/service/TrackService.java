@@ -15,4 +15,10 @@ public interface TrackService {
 
     Iterable<Track> findAll();
 
+    List<Track> findByDescription(String description, String track_type);
+
+    List<Track> searchTracks(String text);
+
+    List<Track> searchTracksByParams(String text, String species, String type, int release, String division);
+
 }
