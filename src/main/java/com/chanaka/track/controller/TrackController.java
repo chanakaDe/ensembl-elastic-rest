@@ -1,7 +1,7 @@
-package com.chanaka.book.controller;
+package com.chanaka.track.controller;
 
-import com.chanaka.book.model.Track;
-import com.chanaka.book.service.TrackService;
+import com.chanaka.track.model.Track;
+import com.chanaka.track.service.TrackService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,17 +29,12 @@ public class TrackController {
         return trackService.findByDescription(description, track_type);
     }
 
-    @RequestMapping(value = "/search/{text}", method = RequestMethod.GET)
-    public List<Track> searchTracks(@PathVariable String text) {
-        return trackService.searchTracks(text);
-    }
-
     @RequestMapping(value = "/search_advanced", method = RequestMethod.GET)
     public List<Track> searchTracksByParams(@RequestParam(value = "text", required = true) String text,
-                                            @RequestParam(value = "species", required = true) String species,
-                                            @RequestParam(value = "type", required = true) String type,
-                                            @RequestParam(value = "release", required = true) int release,
-                                            @RequestParam(value = "division", required = true) String division) {
+                                            @RequestParam(value = "species", required = false) String species,
+                                            @RequestParam(value = "type", required = false) String type,
+                                            @RequestParam(value = "release", required = false) int release,
+                                            @RequestParam(value = "division", required = false) String division) {
         return trackService.searchTracksByParams(text, species, type, release, division);
     }
 

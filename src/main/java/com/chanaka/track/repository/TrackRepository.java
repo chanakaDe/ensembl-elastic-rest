@@ -1,6 +1,6 @@
-package com.chanaka.book.repository;
+package com.chanaka.track.repository;
 
-import com.chanaka.book.model.Track;
+import com.chanaka.track.model.Track;
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
 
 import java.util.List;

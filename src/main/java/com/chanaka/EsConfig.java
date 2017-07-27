@@ -19,7 +19,7 @@ import java.net.InetAddress;
 //http://geekabyte.blogspot.my/2015/08/embedding-elasticsearch-in-spring.html
 //https://github.com/spring-projects/spring-data-elasticsearch/wiki/Spring-Data-Elasticsearch---Spring-Boot---version-matrix
 @Configuration
-@EnableElasticsearchRepositories(basePackages = "com.chanaka.book.repository")
+@EnableElasticsearchRepositories(basePackages = "com.chanaka.track.repository")
 public class EsConfig {
 
     @Value("${elasticsearch.host}")

@@ -1,7 +1,7 @@
-package com.chanaka.book.service;
+package com.chanaka.track.service;
 
-import com.chanaka.book.model.Track;
-import com.chanaka.book.repository.TrackRepository;
+import com.chanaka.track.model.Track;
+import com.chanaka.track.repository.TrackRepository;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,49 +50,6 @@ public class TrackServiceImpl implements TrackService {
     }
 
     @Override
-    public List<Track> searchTracks(String text) {
-
-        QueryBuilder query = QueryBuilders.boolQuery()
-                .should(QueryBuilders.queryStringQuery(text)
-                        .lenient(true)
-                        .field("long_name")
-                        .field("short_name")
-                        .field("description")
-                        .field("track_type")
-                        .field("genome_species")
-                        .field("genome_assembly")
-                        .field("release_division")
-                        .field("location_type")
-                        .field("location_object_type")
-                        .field("location_species")
-                        .field("location_dbtype")
-                        .field("location_logic_names")
-                ).should(QueryBuilders.queryStringQuery("*" + text + "*")
-                        .lenient(true)
-                        .field("long_name")
-                        .field("short_name")
-                        .field("description")
-                        .field("track_type")
-                        .field("genome_species")
-                        .field("genome_assembly")
-                        .field("release_division")
-                        .field("location_type")
-                        .field("location_object_type")
-                        .field("location_species")
-                        .field("location_dbtype")
-                        .field("location_logic_names"));
-
-        NativeSearchQuery build = new NativeSearchQueryBuilder()
-                .withQuery(query)
-                .build();
-
-        List<Track> tracks = elasticsearchTemplate.queryForList(build, Track.class);
-
-        return tracks;
-
-    }
-
-    @Override
     public List<Track> searchTracksByParams(String text, String species, String type, int release, String division) {
 
         System.out.println("Text : " + text + " Species : " + species + "Type : " + type + " Release : " + release + " Division : " + division);
@@ -107,11 +64,6 @@ public class TrackServiceImpl implements TrackService {
                         .field("genome_species")
                         .field("genome_assembly")
                         .field("release_division")
-                        .field("location_type")
-                        .field("location_object_type")
-                        .field("location_species")
-                        .field("location_dbtype")
-                        .field("location_logic_names")
                 ).should(QueryBuilders.queryStringQuery("*" + text + "*")
                         .lenient(true)
                         .field("long_name")
@@ -120,12 +72,7 @@ public class TrackServiceImpl implements TrackService {
                         .field("track_type")
                         .field("genome_species")
                         .field("genome_assembly")
-                        .field("release_division")
-                        .field("location_type")
-                        .field("location_object_type")
-                        .field("location_species")
-                        .field("location_dbtype")
-                        .field("location_logic_names"))
+                        .field("release_division"))
                 .must(QueryBuilders.queryStringQuery(species)
                         .lenient(true)
                         .field("genome_species"))
