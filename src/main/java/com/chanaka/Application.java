@@ -3,6 +3,7 @@ package com.chanaka;
 import com.chanaka.track.model.GenomeJPA;
 import com.chanaka.track.model.LocationJPA;
 import com.chanaka.track.model.ReleaseJPA;
+import com.chanaka.track.model.Track;
 import com.chanaka.track.model.TrackJPA;
 import com.chanaka.track.service.TrackJPAService;
 import com.chanaka.track.service.TrackService;
@@ -38,12 +39,37 @@ public class Application implements CommandLineRunner {
         printElasticSearchInfo();
 
         List<TrackJPA> tracks = trackJPAService.findAlLTracks();
-        List<GenomeJPA> genomes = trackJPAService.findGenomesOnTracks();
-        List<LocationJPA> locations = trackJPAService.findLocationsOnTracks();
-        List<ReleaseJPA> releases = trackJPAService.findReleaseOnTracks();
-        tracks.forEach(x ->
-                trackService.save(tracks, genomes, locations, releases);
-        );
+
+        for (TrackJPA track : tracks) {
+
+            Track saveTrackData = new Track();
+            saveTrackData.setShort_name(track.getShort_name());
+            saveTrackData.setLong_name(track.getLong_name());
+            saveTrackData.setDescription(track.getDescription());
+            saveTrackData.setTrack_type(track.getTrack_type_id().toString());
+
+            //set genome data
+            GenomeJPA genomes = trackJPAService.findGenomesFindOne(track.getGenome_id());
+            saveTrackData.setGenome_species(genomes.getGenome_species());
+            saveTrackData.setGenome_assembly(genomes.getGenome_assembly());
+            saveTrackData.setGenome_strain(Boolean.parseBoolean(genomes.getGenome_strain()));
+
+            //set location data
+            LocationJPA locations = trackJPAService.findLocationsFindOne(track.getLocation_id());
+            saveTrackData.setLocation_type(locations.getLocation_type());
+            saveTrackData.setLocation_object_type(locations.getLocation_object_type());
+            saveTrackData.setLocation_species(locations.getLocation_species());
+            saveTrackData.setLocation_dbtype(locations.getLocation_dbtype());
+            //saveTrackData.setLocation_logic_names(track.get);
+
+            //set release data
+            Integer releaseId = trackJPAService.getReleaseId(track.getTrack_id());
+            ReleaseJPA findReleaseFindOne = trackJPAService.findReleaseFindOne(releaseId);
+            saveTrackData.setRelease_division(findReleaseFindOne.getReleaseDivision());
+            saveTrackData.setRelease_version(findReleaseFindOne.getReleaseVersion());
+
+            trackService.save(saveTrackData);
+        }
 
     }
 

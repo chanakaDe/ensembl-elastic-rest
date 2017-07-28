@@ -33,6 +33,9 @@ public class GenomeJPA {
     @Column(name = "species_id")
     private String species_id;
 
+    public GenomeJPA() {
+    }
+
     public GenomeJPA(String genome_species, String genome_assembly, String genome_strain, String species_id) {
         this.genome_species = genome_species;
         this.genome_assembly = genome_assembly;

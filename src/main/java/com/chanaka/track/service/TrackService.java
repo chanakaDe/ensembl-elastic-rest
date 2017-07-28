@@ -18,5 +18,4 @@ public interface TrackService {
     List<Track> findByDescription(String description, String track_type);
 
     List<Track> searchTracksByParams(String text, String species, String type, int release, String division);
-
 }

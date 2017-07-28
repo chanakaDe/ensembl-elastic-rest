@@ -6,7 +6,6 @@ import javax.validation.constraints.Size;
 /**
  * Created by chanaka on 7/27/17.
  */
-
 @Entity
 @Table(name = "track")
 public class TrackJPA {
@@ -35,17 +34,21 @@ public class TrackJPA {
 
     @Size(max = 11)
     @Column(name = "genome_id")
-    private String genome_id;
+    private Integer genome_id;
 
     @Size(max = 11)
     @Column(name = "location_id")
-    private String location_id;
+    private Integer location_id;
 
     @Size(max = 11)
     @Column(name = "track_type_id")
-    private String track_type_id;
+    private Integer track_type_id;
 
-    public TrackJPA(String version, String short_name, String long_name, String description, String genome_id, String location_id, String track_type_id) {
+    public TrackJPA() {
+    }
+
+    public TrackJPA(Integer track_id, String version, String short_name, String long_name, String description, Integer genome_id, Integer location_id, Integer track_type_id) {
+        this.track_id = track_id;
         this.version = version;
         this.short_name = short_name;
         this.long_name = long_name;
@@ -95,41 +98,34 @@ public class TrackJPA {
         this.description = description;
     }
 
-    public String getGenome_id() {
+    public Integer getGenome_id() {
         return genome_id;
     }
 
-    public void setGenome_id(String genome_id) {
+    public void setGenome_id(Integer genome_id) {
         this.genome_id = genome_id;
     }
 
-    public String getLocation_id() {
+    public Integer getLocation_id() {
         return location_id;
     }
 
-    public void setLocation_id(String location_id) {
+    public void setLocation_id(Integer location_id) {
         this.location_id = location_id;
     }
 
-    public String getTrack_type_id() {
+    public Integer getTrack_type_id() {
         return track_type_id;
     }
 
-    public void setTrack_type_id(String track_type_id) {
+    public void setTrack_type_id(Integer track_type_id) {
         this.track_type_id = track_type_id;
     }
 
     @Override
     public String toString() {
-        return "TrackJPA{" +
-                "track_id=" + track_id +
-                ", version='" + version + '\'' +
-                ", short_name='" + short_name + '\'' +
-                ", long_name='" + long_name + '\'' +
-                ", description='" + description + '\'' +
-                ", genome_id='" + genome_id + '\'' +
-                ", location_id='" + location_id + '\'' +
-                ", track_type_id='" + track_type_id + '\'' +
-                '}';
+        return "TrackJPA{" + "track_id=" + track_id + ", version=" + version + ", short_name=" + short_name + ", long_name=" + long_name + ", description=" + description + ", genome_id=" + genome_id + ", location_id=" + location_id + ", track_type_id=" + track_type_id + '}';
     }
+
+   
 }

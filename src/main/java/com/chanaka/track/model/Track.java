@@ -1,4 +1,4 @@
-package com.chanaka.book.model;
+package com.chanaka.track.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
 
@@ -15,11 +15,14 @@ public class Track {
     private String long_name;
     private String description;
     private String track_type;
+    
     private String genome_species;
     private String genome_assembly;
     private boolean genome_strain;
+    
     private String release_division;
     private int release_version;
+    
     private String location_type;
     private String location_object_type;
     private String location_species;

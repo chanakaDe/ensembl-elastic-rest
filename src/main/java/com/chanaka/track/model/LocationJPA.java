@@ -37,6 +37,9 @@ public class LocationJPA {
     @Column(name = "location_uri")
     private String location_uri;
 
+    public LocationJPA() {
+    }
+
     public LocationJPA(String location_type, String location_object_type, String location_species, String location_dbtype, String location_uri) {
         this.location_type = location_type;
         this.location_object_type = location_object_type;

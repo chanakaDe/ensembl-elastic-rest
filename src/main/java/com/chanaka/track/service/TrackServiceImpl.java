@@ -1,6 +1,10 @@
 package com.chanaka.track.service;
 
+import com.chanaka.track.model.GenomeJPA;
+import com.chanaka.track.model.LocationJPA;
+import com.chanaka.track.model.ReleaseJPA;
 import com.chanaka.track.model.Track;
+import com.chanaka.track.model.TrackJPA;
 import com.chanaka.track.repository.TrackRepository;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
@@ -31,6 +35,9 @@ public class TrackServiceImpl implements TrackService {
 
     @Override
     public Track save(Track track) {
+        System.out.println("track save");
+        System.out.println(track);
+        System.out.println("track save");
         return trackRepository.save(track);
     }
 
